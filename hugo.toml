@@ -2,3 +2,14 @@ baseURL = 'https://allemagne-pratique.org/'
 languageCode = 'fr-FR'
 title = 'Allemagne Pratique'
 theme = 'ananke'
+
+[[menu.main]]
+  identifier = "contact"
+  name = "Contact"
+  url = "/contact/"
+  weight = 10
+[[menu.main]]
+  identifier = "wo-are-we"
+  name = "A propos de nous"
+  url = "/who-are-we/"
+  weight = 10

@@ -54,6 +54,11 @@ jobs:
           name: static-site
           path: public
 
+      - name: Debug KUBE_CONFIG
+        run: echo "KUBE_CONFIG is ${KUBE_CONFIG:-not set}"
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+
       - name: Apply Kubernetes Job to copy files
         uses: actions-hub/kubectl@master
         env:

@@ -27,6 +27,19 @@ jobs:
           name: static-site
           path: public
 
+  validate:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validate Kubernetes manifest
+        uses: docker://garethr/kubeval:latest
+        with:
+          args: k8s/job.copy-static-files-to-pvc.yml
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -47,38 +60,9 @@ jobs:
           echo "$KUBE_CONFIG" > ~/.kube/config
           chmod 600 ~/.kube/config
 
-      - name: Create a Kubernetes Job to copy files
+      - name: Apply Kubernetes Job to copy files
         run: |
-          cat <<EOF | kubectl apply -f -
-          apiVersion: batch/v1
-          kind: Job
-          metadata:
-            name: copy-static-files
-          spec:
-            template:
-              spec:
-                containers:
-                - name: copy-container
-                  image: busybox
-                  command: ["/bin/sh", "-c"]
-                  args:
-                    - cp -r /source/* /mnt/static-content/;
-                  volumeMounts:
-                  - name: source-files
-                    mountPath: /source
-                  - name: static-content
-                    mountPath: /mnt/static-content
-                volumes:
-                - name: source-files
-                  hostPath:
-                    path: /__w/allemagne-pratique/allemagne-pratique/public
-                    type: Directory
-                - name: static-content
-                  persistentVolumeClaim:
-                    claimName: allemagne-pratique-pvc
-                restartPolicy: Never
-            backoffLimit: 4
-          EOF
+          kubectl apply -f k8s/job.copy-static-files-to-pvc.yml --validate=false
 
       - name: Wait for Job completion
         run: |

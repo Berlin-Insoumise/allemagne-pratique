@@ -1,0 +1,87 @@
+name: Build and Deploy Static Website with Hugo
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  build:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true  # Ensure Hugo themes are checked out if they are submodules
+
+      - name: Build website with Hugo
+        run: hugo --minify
+        container:
+          image: hugomods/hugo:latest
+
+      - name: Upload built site as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: static-site
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    container:
+      image: bitnami/kubectl:latest  # This image has kubectl pre-installed
+
+    steps:
+      - name: Download built site artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: static-site
+          path: public
+
+      - name: Configure KUBECONFIG
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
+        run: |
+          mkdir -p ~/.kube
+          echo "$KUBE_CONFIG" > ~/.kube/config
+          chmod 600 ~/.kube/config
+
+      - name: Create a Kubernetes Job to copy files
+        run: |
+          cat <<EOF | kubectl apply -f -
+          apiVersion: batch/v1
+          kind: Job
+          metadata:
+            name: copy-static-files
+          spec:
+            template:
+              spec:
+                containers:
+                - name: copy-container
+                  image: busybox
+                  command: ["/bin/sh", "-c"]
+                  args:
+                    - cp -r /source/* /mnt/static-content/;
+                  volumeMounts:
+                  - name: source-files
+                    mountPath: /source
+                  - name: static-content
+                    mountPath: /mnt/static-content
+                volumes:
+                - name: source-files
+                  hostPath:
+                    path: /__w/allemagne-pratique/allemagne-pratique/public
+                    type: Directory
+                - name: static-content
+                  persistentVolumeClaim:
+                    claimName: allemagne-pratique-pvc
+                restartPolicy: Never
+            backoffLimit: 4
+          EOF
+
+      - name: Wait for Job completion
+        run: |
+          kubectl wait --for=condition=complete --timeout=60s job/copy-static-files

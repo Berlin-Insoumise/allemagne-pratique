@@ -23,3 +23,14 @@ go.work.sum
 
 # env file
 .env
+
+# IntelliJ
+.idea
+
+# Hugo
+/public/
+/resources/
+
+hugo.exe
+hugo.linux
+hugo.darwin

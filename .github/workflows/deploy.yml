@@ -10,6 +10,7 @@ jobs:
   build:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    container: hugomods/hugo:latest
 
     steps:
       - name: Checkout code
@@ -19,8 +20,6 @@ jobs:
 
       - name: Build website with Hugo
         run: hugo --minify
-        container:
-          image: hugomods/hugo:latest
 
       - name: Upload built site as artifact
         uses: actions/upload-artifact@v2
@@ -31,8 +30,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    container:
-      image: bitnami/kubectl:latest  # This image has kubectl pre-installed
+    container: bitnami/kubectl:latest
 
     steps:
       - name: Download built site artifact

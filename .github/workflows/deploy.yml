@@ -43,7 +43,6 @@ jobs:
   deploy:
     needs: validate
     runs-on: ubuntu-latest
-    container: bitnami/kubectl:latest
 
     steps:
       - name: Checkout code
@@ -55,20 +54,9 @@ jobs:
           name: static-site
           path: public
 
-      - name: Configure KUBECONFIG
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBECONFIG }}
-        run: |
-          mkdir -p ~/.kube
-          echo "$KUBE_CONFIG" > ~/.kube/config
-          chmod 600 ~/.kube/config
-          kubectl cluster-info
-          kubectl get pods
-
       - name: Apply Kubernetes Job to copy files
-        run: |
-          kubectl apply -f k8s/job.copy-static-files-to-pvc.yml --validate=false
-
-      - name: Wait for Job completion
-        run: |
-          kubectl wait --for=condition=complete --timeout=60s job/copy-static-files
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: apply -f k8s/job.copy-static-files-to-pvc.yml --validate=false

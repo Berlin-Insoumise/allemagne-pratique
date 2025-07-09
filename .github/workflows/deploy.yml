@@ -62,6 +62,8 @@ jobs:
           mkdir -p ~/.kube
           echo "$KUBE_CONFIG" > ~/.kube/config
           chmod 600 ~/.kube/config
+          kubectl cluster-info
+          kubectl get pods
 
       - name: Apply Kubernetes Job to copy files
         run: |

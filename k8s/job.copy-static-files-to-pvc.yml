@@ -1,0 +1,29 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: copy-static-files
+spec:
+  template:
+    spec:
+      containers:
+        - name: copy-container
+          image: busybox
+          command: ["/bin/sh", "-c"]
+          args:
+            - cp -r /source/* /mnt/static-content/;
+          volumeMounts:
+            - name: source-files
+              mountPath: /source
+            - name: static-content
+              mountPath: /mnt/static-content
+      volumes:
+        - name: source-files
+          hostPath:
+            path: /__w/allemagne-pratique/allemagne-pratique/public
+            type: Directory
+        - name: static-content
+          persistentVolumeClaim:
+            claimName: allemagne-pratique-pvc
+      restartPolicy: Never
+  backoffLimit: 4

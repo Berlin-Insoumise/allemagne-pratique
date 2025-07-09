@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true  # Ensure Hugo themes are checked out if they are submodules
 
@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Validate Kubernetes manifest
         uses: docker://garethr/kubeval:latest
@@ -41,11 +41,14 @@ jobs:
           args: k8s/job.copy-static-files-to-pvc.yml
 
   deploy:
-    needs: build
+    needs: validate
     runs-on: ubuntu-latest
     container: bitnami/kubectl:latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Download built site artifact
         uses: actions/download-artifact@v4
         with:

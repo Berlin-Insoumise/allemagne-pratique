@@ -4,33 +4,25 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
-    name: Build static files
+    container: hugomods/hugo:latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true  # Ensure Hugo themes are checked out if they are submodules
 
-    - name: checkout branch
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ inputs.ref }}
-        fetch-depth: 0
-        submodules: true
+      - name: Build website with Hugo
+        run: hugo --minify
 
-    - name: install build deps
-      run: make install
-
-    - name: hugo build
-      run: make build
-
-    - name: Archive static build
-      uses: actions/upload-artifact@v4
-      with:
-        name: static-build
-        path: build/
-        retention-days: 7
-
+      - name: Upload built site as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-site
+          path: public/
+          retention-days: 7
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,4 +48,4 @@ jobs:
       run: echo "set man-db/auto-update false" | sudo debconf-communicate && sudo dpkg-reconfigure man-db && sudo apt-get install -y lftp
 
     - name: mirror local build/ with remote www/
-      run: bash rsync_ftp.bash ${{ secrets.FTP_USER }} ${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }} ./build /www 4
+      run: bash rsync_ftp.bash ${{ secrets.FTP_USER }} ${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }} ./public /www 4

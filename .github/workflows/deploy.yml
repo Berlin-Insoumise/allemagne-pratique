@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Build static files with Hugo
     container: hugomods/hugo:latest
 
     steps:
@@ -42,7 +43,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: static-build
-        path: build
+        path: public
 
     - name: install lftp
       run: echo "set man-db/auto-update false" | sudo debconf-communicate && sudo dpkg-reconfigure man-db && sudo apt-get install -y lftp

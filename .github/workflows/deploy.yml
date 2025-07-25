@@ -1,55 +1,28 @@
-name: Deploy website
+name: 🚀 Deploy Website
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    name: Build static files with Hugo
+    name: 🛠️ Build and Deploy Website
     container: hugomods/hugo:latest
 
     steps:
-      - name: Checkout code
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v3
         with:
           submodules: true  # Ensure Hugo themes are checked out if they are submodules
 
-      - name: Build website with Hugo
+      - name: 🏗️ Build Static Site with Hugo
         run: hugo --minify
 
-      - name: Upload built site as artifact
-        uses: actions/upload-artifact@v4
+      - name: 🚀 Deploy to FTP Server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          name: static-site
-          path: public/
-          retention-days: 7
-
-  deploy:
-    runs-on: ubuntu-latest
-    name: Deploy to FTP server
-    needs: build
-
-    steps:
-
-    - name: checkout branch
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ inputs.ref }}
-        fetch-depth: 0
-        submodules: true
-
-    - name: Download static build
-      uses: actions/download-artifact@v4
-      with:
-        name: static-site
-        path: public
-
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./public/
-        server-dir: /www/
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public/
+          server-dir: /www/

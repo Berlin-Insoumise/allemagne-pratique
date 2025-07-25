@@ -42,7 +42,7 @@ jobs:
     - name: Download static build
       uses: actions/download-artifact@v4
       with:
-        name: static-build
+        name: static-site
         path: public
 
     - name: install lftp

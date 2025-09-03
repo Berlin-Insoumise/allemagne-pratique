@@ -11,7 +11,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     name: 🛠️ Build and Deploy Website
-    container: hugomods/hugo:latest
+    container: klakegg/hugo:latest
 
     steps:
       - name: 📥 Checkout Repository

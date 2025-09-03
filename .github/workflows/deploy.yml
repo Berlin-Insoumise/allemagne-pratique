@@ -56,7 +56,7 @@ jobs:
 
       - name: Install Node.js dependencies
         run: |
-          [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
+          npm install --save-dev tailwindcss @tailwindcss/cli
 
       - name: 🏗️ Build Static Site with Hugo
         run: hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic

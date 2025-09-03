@@ -3,24 +3,29 @@ name: 🚀 Deploy Website
 on:
   push:
     branches: [ main ]
-  pull_request:
-    types: [ closed ]
-    branches: [ main ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     name: 🛠️ Build and Deploy Website
-    container: klakegg/hugo:latest
+    container: hugomods/hugo:latest
 
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v3
+
+      # Install Node.js (required for TailwindCSS)
+      - name: 📦 Install Node.js
+        uses: actions/setup-node@v4
         with:
-          submodules: true  # Ensure Hugo themes are checked out if they are submodules
+          node-version: '22'
+
+      # Install TailwindCSS CLI globally
+      - name: 🎨 Install TailwindCSS
+        run: npm install -g tailwindcss
 
       - name: 🏗️ Build Static Site with Hugo
-        run: hugo --minify
+        run: hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic
 
       - name: 🚀 Deploy to FTP Server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

@@ -20,9 +20,9 @@ jobs:
         with:
           node-version: '22'
 
-      # Install TailwindCSS CLI globally
+      # Install TailwindCSS CLI
       - name: 🎨 Install TailwindCSS
-        run: npm install -g tailwindcss
+        run: npm install tailwindcss
 
       - name: 🏗️ Build Static Site with Hugo
         run: hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic

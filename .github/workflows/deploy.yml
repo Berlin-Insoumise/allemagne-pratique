@@ -7,22 +7,31 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      GO_VERSION: 1.25.0
+      HUGO_VERSION: 0.149.0
+      NODE_VERSION: 22.18.0
+      TZ: Europe/Oslo
     name: 🛠️ Build and Deploy Website
-    container: hugomods/hugo:latest
 
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
-      # Install Node.js (required for TailwindCSS)
-      - name: 📦 Install Node.js
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache:
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: ${{ env.NODE_VERSION }}
 
-      # Install TailwindCSS CLI
-      - name: 🎨 Install TailwindCSS
-        run: npm install tailwindcss
+      - name: Install Node.js dependencies
+        run: |
+          [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
 
       - name: 🏗️ Build Static Site with Hugo
         run: hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic

@@ -14,10 +14,7 @@
             aria-label="search"
             class="border-border text-text-dark hover:text-primary
             dark:border-darkmode-border mr-5 inline-block border-r pr-5
-            text-xl dark:text-white cursor-pointer dark:hover:text-darkmode-primary
-            {{ if not (or site.Params.navigation_button.enable site.Params.theme_switcher) }}
-              lg:border-r-0 lg:pr-0
-            {{ end }}"
+            text-xl dark:text-white cursor-pointer dark:hover:text-darkmode-primary"
             data-target="search-modal">
             <i class="fa-solid fa-search"></i>
           </button>
@@ -124,7 +121,7 @@
 
   <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
       {{ partial "components/language-switcher" (dict "Context" . "Class" "mr-5 pl-2 py-1 dark:bg-darkmode-light rounded") }}
-      {{ partial "components/theme-switcher" (dict "Class" "mr-5") }}
+      {{/*  {{ partial "components/theme-switcher" (dict "Class" "mr-5") }}  */}}
 
       <!-- navigation btn -->
       {{ if site.Params.navigation_button.enable }}
@@ -135,5 +132,20 @@
         </a>
       {{ end }}
     </div>
+  <!-- navigation categories -->
+    <ul class="lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+          {{ range $name, $items := site.Taxonomies.categories }}
+            <li>
+              <a
+                class="hover:text-primary dark:hover:text-darkmode-primary {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `categories`) (eq $.Page.Title .Page.Title)) }}
+                  active
+                {{ end }} flex justify-between"
+                href="{{ .Page.RelPermalink }}">
+                {{ .Page.Title }} 
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+
   </nav>
 </header>

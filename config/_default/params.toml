@@ -11,7 +11,7 @@ logo_height = "32px"
 # if logo_webp set false, will not generate WEBP version of logo | default is true
 logo_webp = true
 # logo text will only show when logo is missing.
-logo_text = "Hugoplate"
+logo_text = "Allemagne Pratique"
 # navbar fixed to top
 navbar_fixed = true
 # theme-mode
@@ -27,7 +27,7 @@ google_adsense = ""     # example: ca-pub-xxxxxxxxxxxxxxxx
 # custom script on header, example: custom_script= "<script>console.log(\"Hello World\")</script>"
 custom_script = ""
 # copyright
-copyright = "Designed & Developed by [Zeon Studio](https://zeon.studio)"
+copyright = "Designé et développé par [l'équipe IT Berlin Insoumise](https://allemagnepratique.fr/a-propos)"
 
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
@@ -38,7 +38,7 @@ preloader = "" # use jpg, png, svg or gif format.
 # Navigation button
 [navigation_button]
 enable = true
-label = "get a quote"
+label = "Permanence d'aide citoyenne"
 link = "contact"
 
 # search
@@ -62,8 +62,8 @@ content = "You must replace the **baseURL** in **hugo.toml** file when deploying
 # seo meta data for OpenGraph / Twitter Card
 # seo module: https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/basic-seo
 [metadata]
-keywords = ["Boilerplate", "Hugo"]
-description = "Hugo & Tailwindcss Starter"
+keywords = ["conseils pratiques Allemagne", "s'installer en Allemagne"]
+description = "Site de conseils pratiques pour les français qui s'installent en Allemagne"
 author = "zeon.studio"
 twitter = "zeon_studio"
 image = "images/og-image.png"
@@ -83,8 +83,8 @@ mastodon = "" # Your verification code
 [cookies]
 enable = false
 expire_days = 60
-content = "This site uses cookies. By continuing to use this website, you agree to their use."
-button = "I Accept"
+content = "Ce site utilise des cookies. En continuant à naviguer sur ce site, vous acceptez leur utilisation."
+button = "J'accepte"
 
 # diagrams
 [mermaid]

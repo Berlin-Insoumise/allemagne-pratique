@@ -1,12 +1,12 @@
 ---
-title: "Title article Finance 2"
+title: "Title article logement 1"
 meta_title: ""
 description: "this is meta description"
-date: 2022-04-04T05:00:00Z
+date: 2024-04-04T05:00:00Z
 image: "/images/image-placeholder.png"
-categories: ["Finance"]
+categories: ["logement"]
 author: "Sam Wilson"
-tags: ["technology", "tailwind"]
+tags: ["Tag 1", "tailwind"]
 draft: false
 ---
 

@@ -1,10 +1,10 @@
 ---
-title: "How to build an Application with modern Technology"
+title: "Titre article Droit du travail 1"
 meta_title: ""
 description: "this is meta description"
 date: 2022-04-04T05:00:00Z
 image: "/images/image-placeholder.png"
-categories: ["Software"]
+categories: ["Droit du travail"]
 author: "John Doe"
 tags: ["software", "tailwind"]
 draft: false

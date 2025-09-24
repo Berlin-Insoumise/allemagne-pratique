@@ -1,0 +1,8 @@
+<!-- layouts/partials/logo.html -->
+
+{{ $logo := resources.Get "images/logo-allemagne-pratique.svg" }}
+{{ if $logo }}
+  <img src="{{ $logo.RelPermalink }}" alt="{{ site.Title }}" class="h-[4rem] w-auto" />
+{{ else }}
+  <span class="text-xl font-bold">{{ site.Title }}</span>
+{{ end }}

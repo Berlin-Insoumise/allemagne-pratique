@@ -1,0 +1,45 @@
+{{ $context := .Context }}
+{{ $class := .Class }}
+{{ $base := site.Home.Permalink }}
+
+<div class="breadcrumb {{ $class }}">
+  <ul class="container flex space-x-2 py-4">
+    <!-- Home -->
+    <li>
+      <a class="dark:text-darkmode-primary" href="{{ $base }}">
+        {{ T "home" | default "Home" }}
+      </a>
+      <span class="inline-block ml-2">></span>
+    </li>
+
+    <!-- Ancestors -->
+    {{ range $i, $ancestor := $context.Ancestors.Reverse }}
+      {{ if and (not $ancestor.IsHome) (ne $ancestor.Title "Pages") }}
+        <li>
+          <a class="text-primary dark:text-darkmode-primary" href="{{ $ancestor.RelPermalink }}">
+            {{/* Affiche le titre si défini, sinon fallback avec le nom de fichier ou slug */}}
+            {{ if $ancestor.Title }}
+              {{ $ancestor.Title }}
+            {{ else }}
+              {{ $ancestor.File.BaseFileName | humanize | title }}
+            {{ end }}
+          </a>
+          <span class="inline-block ml-2">></span>
+        </li>
+      {{ end }}
+    {{ end }}
+
+    <!-- Page courante -->
+    <li>
+      <span class="text-primary dark:text-darkmode-primary">
+        {{ if $context.Title }}
+          {{ $context.Title }}
+        {{ else if $context.File }}
+          {{ $context.File.BaseFileName | humanize | title }}
+        {{ else }}
+          {{ "Page" }}
+        {{ end }}
+      </span>
+    </li>
+  </ul>
+</div>

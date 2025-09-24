@@ -27,7 +27,7 @@ google_adsense = ""     # example: ca-pub-xxxxxxxxxxxxxxxx
 # custom script on header, example: custom_script= "<script>console.log(\"Hello World\")</script>"
 custom_script = ""
 # copyright
-copyright = "Designé et développé par [l'équipe IT Berlin Insoumise](https://allemagnepratique.fr/a-propos)"
+copyright = "[Un site proposé par Berlin Insoumise © Allemagne Pratique 2025](https://allemagne-pratique.fr/a-propos)"
 
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader

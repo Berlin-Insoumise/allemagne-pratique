@@ -1,7 +1,8 @@
 {
-  "name": "hugoplate",
-  "description": "hugo tailwindcss boilerplate",
-  "version": "2.2.0",
+  "name": "allemagne-pratique",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "avec comme base: hugo tailwindcss boilerplate",
   "license": "MIT",
   "author": "zeon.studio",
   "scripts": {

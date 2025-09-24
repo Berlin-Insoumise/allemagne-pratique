@@ -1,12 +1,12 @@
 ---
-title: "Title article Finance 2"
+title: "Titre article CULTURE 1"
 meta_title: ""
 description: "this is meta description"
-date: 2022-04-04T05:00:00Z
+date: 2025-04-04T05:00:00Z
 image: "/images/image-placeholder.png"
-categories: ["Finance"]
-author: "Sam Wilson"
-tags: ["technology", "tailwind"]
+categories: ["Culture"]
+author: "John Doe"
+tags: ["pass", "Cinéma"]
 draft: false
 ---
 

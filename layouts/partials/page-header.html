@@ -2,7 +2,7 @@
   {{ partial "components/breadcrumb" (dict "Context" . "Class" "") }}
   <div class="container text-center">
     <div
-    class="from-body to-light dark:from-darkmode-body dark:to-darkmode-light rounded-2xl px-8 py-14">
+    class="from-body to-light dark:from-darkmode-body dark:to-darkmode-light rounded-2xl px-8 pt-14">
       <h1>{{ T (printf "%s" (lower .Title)) | default .Title | title }}</h1>
     </div>
   </div>

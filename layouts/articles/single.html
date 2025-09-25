@@ -21,17 +21,16 @@
           </li>
 
           {{ $categories := .Params.categories }}
-          {{ if $categories }}
-            <li class="mr-4 inline-block">
-              <i class="fa-regular fa-folder mr-2"></i>
-              {{ range $i, $p := $categories }}
-                <a href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}/">
-                  {{ . | humanize }}{{ if ne $i (sub (len $categories) 1) }},{{ end }}
-                </a>
-              {{ end }}
-            </li>
-          {{ end }}
-
+            {{ if $categories }}
+              <li class="mr-4 inline-block">
+                <i class="fa-regular fa-folder mr-2"></i>
+                {{ range $i, $name := $categories }}
+                  <a href="/articles/#{{ urlize $name }}">
+                    {{ $name | humanize }}{{ if ne $i (sub (len $categories) 1) }},{{ end }}
+                  </a>
+                {{ end }}
+              </li>
+            {{ end }}
           <li class="mr-4 inline-block">
             <i class="fa-regular fa-clock mr-2"></i>{{ time.Format ":date_long" .PublishDate }}
           </li>
@@ -86,9 +85,9 @@
       {{ with $related }}
         <div class="section pb-0">
           <h2 class="h3 mb-12">{{ T "related_posts" }}</h2>
-          <div class="row">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {{ range . }}
-              <div class="lg:col-3 md:col-6 mb-14">
+              <div class="">
                 {{ partial "components/blog-card" . }}
               </div>
             {{ end }}

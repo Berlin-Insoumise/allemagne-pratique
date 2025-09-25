@@ -97,21 +97,17 @@
     </div>
 
   <!-- navigation categories -->
-
-    <ul class="flex w-full py-6 lg:order-1 space-x-4 xl:space-x-6">
-          {{ range $name, $items := site.Taxonomies.categories }}
-            <li class= "rounded-xs">
-              <a
-                class="categorie block px-4 py-2 rounded-md font-semibold hover:text-primary dark:hover:text-darkmode-primary {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `categories`) (eq $.Page.Title .Page.Title)) }}
-                  active
-                {{ end }} flex justify-between"
-                href="{{ .Page.RelPermalink }}">
-               <span>{{ if .Page.Title }}{{ .Page.Title }}{{ else }}{{ $name | title }}{{ end }}</span>
-
-              </a>
-            </li>
-          {{ end }}
+ 
+    <ul id="categories-menu" class="overflow-x-auto flex w-full py-6 lg:order-1 space-x-4 xl:space-x-6">
+    {{ range $name, $items := site.Taxonomies.categories }}
+      <li class= "">
+        <a href="/articles/#{{ urlize $name }}" 
+          data-target="{{ urlize $name }}" 
+            class="categorie rounded-md whitespace-nowrap px-4 py-2 font-semibold hover:text-primary dark:hover:text-darkmode-primary">
+          {{ $name | humanize }}
+        </a>
+      </li>
+    {{ end }}
     </ul>
-
   </nav>
 </header>

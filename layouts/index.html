@@ -1,7 +1,7 @@
 {{ define "main" }}
   <!-- Banner -->
   {{ with .Params.banner }}
-  {{ partial "home-banner-bgimg.html" . }}
+    {{ partial "home-banner-bgimg.html" . }}
     <section class="section home-banner flex items-center justify-center text-white h-[55vh] md:h-[50vh] lg:h-[60vh] xl:h-[70vh]">
       <div class="container pt-14">
         <div class="row justify-center">
@@ -17,9 +17,7 @@
                 <a
                   class="btn btn-primary"
                   href="{{ .link | absURL }}"
-                  {{ if strings.HasPrefix .link `http` }}
-                    target="_blank" rel="noopener"
-                  {{ end }}>
+                  {{ if strings.HasPrefix .link "http" }} target="_blank" rel="noopener" {{ end }}>
                   {{ .label }}
                   <i class="fa fa-arrow-right pl-2"></i>
                 </a>
@@ -32,101 +30,63 @@
   {{ end }}
   <!-- /Banner -->
 
-  <!-- conseil -->
-  {{ range $i, $e:= .Params.conseil }}
-    <section class="section-sm {{ if (modBool $i 2) }}bg-gradient{{ end }}">
-      <div class="container">
-        <div class="row items-center justify-between">
-          
-          <div
-            class="{{ if not (modBool $i 2) }}
-              md:order-1
-            {{ end }} md:col-7 lg:col-6">
-            <h2 class="mb-4">
-              {{ .title | markdownify }}
-            </h2>
-          </div>
-        </div>
-      </div>
-    </section>
-  {{ end }}
-  <!-- /conseil -->
-
-  <!-- categories -->
-   <section class="section-sm">
-  <div class="container">
-    <div class="row items-center justify-between border border-gray-300 rounded-md p-6">
-      {{ if isset site.Taxonomies "categories" }}
-      {{ if not (eq (len site.Taxonomies.categories) 0) }}
-        <h3 class="mb-6 text-lg">Conseils pratiques</h3>
-        <div class="bg-light dark:bg-darkmode-light rounded p-8">
-          <div class="grid grid-cols-2 gap-4">
-            {{ range $name, $items := site.Taxonomies.categories }}
-              <div class="card rounded-md p-6">
-                <div class="flex justify-between">
-                  <div class="flex items-center gap-2">
-                    {{ with .Page.Params.icon }}
-                      <i class="{{ . }}"></i>
-                      <!-- Ou une image -->
-                      <!-- <img src="{{ . | relURL }}" alt="{{ $name }}" class="w-6 h-6"> -->
-                    {{ end }}
-                <span>{{ if .Page.Title }}{{ .Page.Title }}{{ else }}{{ $name | title }}{{ end }}</span>           
-            </div>
+  <section class="section-sm">
+    <div class="container">
+      <div class="flex flex-col lg:flex-row space-x-12">
+        <div class="lg:col-8">
+          <!-- conseil -->
+          {{ with .Params.conseil }}
+            {{ range $i, $e := . }}
+              <div class="row items-center justify-between {{ if (modBool $i 2) }}{{ end }}">
+                <div class="{{ if not (modBool $i 2) }} md:order-1 {{ end }}">
+                  <h2 class="my-8">{{ $e.title | markdownify }}</h2>
                 </div>
-
-                <ul class="mt-4 list-disc list-inside text-sm">
-                  {{ range first 2 (sort $items "Date" "desc") }}
-                    <li>
-                      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                    </li>
-                  {{ end }}
-                </ul>
-                 <a class="flex items-center" href="/articles/#{{ urlize $name }}">
-                    voir plus <i class="fa fa-arrow-right pl-2"></i>
-                  </a>
               </div>
             {{ end }}
-          </div>
-        </div>
-      {{ end }}
-      {{ end }}
-    </div>
-  </div>
-</section>
+          {{ end }}
+          <!-- /conseil -->
 
-
-
-    
-
-  <!-- premanence -->
-  {{ with site.GetPage "sections/permanence" }}
-    {{ if .Params.enable }}
-      <section class="section">
-        <div class="container">
-          <div class="row">
-            <div class="md:col-10 lg:col-8 xl:col-6 mx-auto mb-12 text-center">
-              <h2 class="mb-4">
-                {{ .Title | markdownify }}
-              </h2>
-              <p>
-                {{ .Params.description | markdownify }}
-              </p>
-              {{ with .Params.button }}
-              {{ if .enable }}
-                <a
-                  class="btn btn-primary"
-                  href="{{ .link | absURL }}"
-                  target="_blank"
-                  rel="noopener">
-                  {{ .label }}
-                </a>
+          <!-- categories -->
+          <div class="row items-center justify-between border border-gray-300 rounded-md mt-8">
+            {{ if isset site.Taxonomies "categories" }}
+              {{ if gt (len site.Taxonomies.categories) 0 }}
+                <h3 class="pt-8 px-8 text-lg">Conseils pratiques</h3>
+                <div class="bg-light dark:bg-darkmode-light rounded p-8">
+                  <div class="grid grid-cols-2 gap-4">
+                    {{ range $name, $items := site.Taxonomies.categories }}
+                      {{ $first := index $items 0 }}
+                      <div class="card rounded-md p-6">
+                        <div class="flex justify-between">
+                          <div class="flex items-center gap-2">
+                            {{ with $first.Params.icon }}
+                              <i class="{{ . }}"></i>
+                            {{ end }}
+                            <span>{{ $first.Title }}</span>
+                          </div>
+                        </div>
+                        <ul class="mt-4 list-disc list-inside text-sm">
+                          {{ range first 2 (sort $items "Date" "desc") }}
+                            <li>
+                              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                            </li>
+                          {{ end }}
+                        </ul>
+                        <a class="flex items-center" href="/articles/#{{ urlize $name }}">
+                          voir plus <i class="fa fa-arrow-right pl-2"></i>
+                        </a>
+                      </div>
+                    {{ end }}
+                  </div>
+                </div>
               {{ end }}
             {{ end }}
-            </div>
           </div>
+          <!-- /categories -->
         </div>
-      </section>
-    {{ end }}
-  {{ end }}
-  <!-- /premanence -->
+        <div class="flex flex-col mt-36 mb-10 ">
+          {{ partial "components/permanence.html" . }}
+        </div>
+       </div>
+    </div>
+  </section>
 {{ end }}

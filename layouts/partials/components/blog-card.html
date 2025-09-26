@@ -1,16 +1,16 @@
 
-<a class="card shadow-md hover:shadow-none rounded-md flex justify-between" href="{{ .RelPermalink }}">
-    <div class="p-6">
-        <h4 class="mb-1 h4">
+<a class="card shadow-md hover:shadow-none rounded-md flex justify-between items-stretch overflow-hidden" href="{{ .RelPermalink }}">
+    <div class=" flex-1 flex items-center">
+        <h4 class="p-6 h4 ">
           {{ .Title }}
         </h4>
         {{/*  <p>{{ .Summary | plainify }}</p>   */}}
     </div>
-    <div>
+    <div class="w-[160px] relative">
         {{ $image:= .Params.image }}
-        {{ if $image }}
-            {{ partial "image" (dict "Src" $image "Context" .Page "Alt" .Title "Class" "w-full lg:w-[160px] h-full object-cover") }}
-        {{ end }}
+            {{ if $image }}
+                {{ partial "image" (dict "Src" $image "Context" .Page "Alt" .Title "Class" "absolute inset-0 w-full h-full object-cover block") }}
+            {{ end }}
     </div>
   </a>
 

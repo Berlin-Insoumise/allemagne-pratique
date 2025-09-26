@@ -27,6 +27,7 @@ google_adsense = ""     # example: ca-pub-xxxxxxxxxxxxxxxx
 # custom script on header, example: custom_script= "<script>console.log(\"Hello World\")</script>"
 custom_script = ""
 # copyright
+
 copyright = "[Un site proposé par Berlin Insoumise © Allemagne Pratique 2025](https://allemagne-pratique.org/a-propos)"
 
 # Preloader
@@ -67,6 +68,7 @@ description = "Site de conseils pratiques pour les français qui s'installent en
 author = "L'équipe Allemagne Pratique"
 twitter = ""
 image = "/images/allemagne-pratique.png"
+
 
 
 # site verifications

@@ -5,6 +5,7 @@ module.exports = {
     "./assets/css/**/*.{css,scss}",    // pour le CSS avec @apply
     "./themes/hugoplate/**/*.{html,css}"
   ],
+
   theme: { extend: {
     spacing: {
         '8': '2rem',

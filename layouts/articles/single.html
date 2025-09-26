@@ -1,5 +1,6 @@
 {{ define "main" }}
 {{ partial "components/breadcrumb" (dict "Context" . "Class" "") }}
+
 <section class="section pt-14">
   <div class="container">
     <div class="flex flex-col  lg:flex-row space-x-12">
@@ -90,6 +91,7 @@
 
       {{ with $related }}
         <div class="py-12">
+
           <h2 class="h3 mb-12">{{ T "related_posts" }}</h2>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {{ range . }}
@@ -101,6 +103,7 @@
         </div>
       {{ end }}
     {{ end }}
+
   </div>
 </div>
 

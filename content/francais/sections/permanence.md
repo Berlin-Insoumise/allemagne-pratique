@@ -7,9 +7,11 @@ button:
   label: "Voir les créneaux disponibles"
   link: "https://"
 
+
 # don't create a separate page
 build:
   render: "never"
 ---
+
 
 Permanence juridique gratuite à <strong>Berlin</strong>

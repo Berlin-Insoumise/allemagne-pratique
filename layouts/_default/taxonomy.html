@@ -1,0 +1,14 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+
+  <section class="section">
+    <div class="container">
+        <!-- blog posts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {{ range .Data.Pages }}
+            {{ partial "components/blog-card" . }}
+        {{ end }}
+        </div>
+    </div>
+  </section>
+{{ end }}

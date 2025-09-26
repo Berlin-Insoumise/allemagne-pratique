@@ -1,0 +1,38 @@
+############# English navigation ##############
+
+# main menu
+[[main]]
+name = "Accueil"
+url = "/"
+weight = 1
+
+[[main]]
+name = "Agenda"
+url = "/agenda"
+weight = 2
+
+[[main]]
+name = "À propos"
+url = "/a-propos"
+weight = 3
+
+[[main]]
+name = "Contact"
+url = "/contact"
+weight = 4
+
+# footer menu
+[[footer]]
+name = "À propos"
+url = "/a-propos"
+weight = 1
+
+[[footer]]
+name = "Elements"
+url = "/elements"
+weight = 2
+
+[[footer]]
+name = "Privacy Policy"
+url = "/privacy-policy"
+weight = 3

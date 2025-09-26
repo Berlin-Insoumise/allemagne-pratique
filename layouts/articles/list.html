@@ -1,0 +1,20 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+  <section class="section">
+    <div class="container">
+      <div class="flex flex-col">
+        <!-- Articles regroupés par catégorie -->
+        {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+          <section id="{{ urlize $name }}" class="mb-12 scroll-mt-20">
+            <h2>{{ $name | humanize }}</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {{ range $taxonomy.Pages.ByDate.Reverse }}
+                {{ partial "components/blog-card" . }}
+              {{ end }}
+            </div>
+          </section>
+          {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}

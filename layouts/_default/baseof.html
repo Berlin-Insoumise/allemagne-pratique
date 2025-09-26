@@ -18,9 +18,12 @@
       {{ partial "css.html" . }}
     {{ end }}
 
+    {{ $custom := resources.Get "css/custom.css" | postCSS | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $custom.RelPermalink }}">
   </head>
 
   <body>
+
     <!-- cache partial only in production -->
     {{ if hugo.IsProduction }}
       {{ partialCached "preloader.html" . }}
@@ -41,7 +44,6 @@
     <!-- header (don't cache it) -->
     {{ partial "essentials/header.html" . }}
     {{ partial "search-modal.html" (dict "Context" . ) }}
-
 
     <main>
       {{ block "main" . }}{{ end }}

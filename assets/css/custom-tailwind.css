@@ -1,0 +1,108 @@
+/* === Tes surcharges qui utilisent @apply === */
+
+html {
+  scroll-behavior: smooth;
+}
+
+p, .h1, .h2, .h3, .h4, h1, h2, h3, h4 {
+  color: #0B0A09;;
+}
+
+.h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.header {
+  background-color: #F8F1FF;
+}
+
+.navbar-nav {
+  background-color: #F8F1FF;
+}
+
+.nav-link { 
+  color: #76039C;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+}
+
+.nav-link.active { 
+  text-decoration: none;
+    font-weight: 700;
+}
+
+a.categorie {
+  background-color: #FFF;
+  &:hover {
+    background-color: transparent;
+  }
+  &.active {
+  background-color: #9A00CD;
+  color: #fff;
+  &:hover {
+    background-color: #76039C;
+    color: #fff;
+  }
+}
+}
+
+.btn-outline-primary {
+  background-color: #76039C;
+  color: #FFF;
+  border: #76039C;
+  border-radius: 8px;
+}
+
+.btn-outline-primary:hover {
+  background-color: #9A00CD;
+}
+
+.btn {
+  text-transform: initial;
+}
+
+.breadcrumb {
+  background-color: #9A00CD;
+  color: #fff;
+}
+
+nav[aria-label="Pagination"] {
+  a:not(.active) {
+    background-color: #FFF;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .active {
+    color:#48085D;
+    background-color: #F8F1FF;
+    font-weight: 700;
+  }
+  .desactivated {
+    color: #b4aba2;
+  }
+} 
+
+section[id] {
+  scroll-margin-top: 195px; /* ou header.offsetHeight pour le scroll - anchor de la page articles/list.html  */
+}
+
+
+main {
+  background-color: #F8F8F8;
+}
+
+    .card {
+      background-color: #fff;
+    }
+
+footer {
+  background-color: #48085D;
+}
+

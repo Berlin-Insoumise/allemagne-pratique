@@ -1,0 +1,35 @@
+<!-- categories -->
+{{ if isset site.Taxonomies "categories" }}
+  {{ if not (eq (len site.Taxonomies.categories) 0) }}
+    <div class="mb-8">
+      <h5 class="mb-6">{{ T "categories" }}</h5>
+      <div class="bg-dark dark:bg-darkmode-light rounded p-8">
+        <ul class="space-y-4">
+          {{ range $name, $items := site.Taxonomies.categories }}
+            {{ if gt (len $items) 0 }}  <!-- affiche seulement si au moins 1 article -->
+              <li>
+                <a
+                  class="hover:text-primary dark:hover:text-darkmode-primary {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `categories`) (eq $.Page.Title .Page.Title)) }}active{{ end }} flex justify-between"
+                  href="{{ if .Page }}{{ .Page.RelPermalink }}{{ else }}/categories/{{ $name | urlize }}/{{ end }}">
+                  
+                  <span>
+                    {{ if .Page }}
+                      {{ if .Page.Title }}
+                        {{ .Page.Title }}
+                      {{ else }}
+                        {{ $name | title }}
+                      {{ end }}
+                    {{ else }}
+                      {{ $name | title }}
+                    {{ end }}
+                  </span>
+                  <span>( {{ len $items }} )</span>
+                </a>
+              </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  {{ end }}
+{{ end }}

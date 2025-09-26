@@ -1,0 +1,26 @@
+{{ $img := resources.Get "images/banner-berlin.jpg" }}
+{{ with $img }}
+  {{ $imgSmall := .Resize "600x" | resources.Fingerprint }}
+  {{ $imgMedium := .Resize "900x" | resources.Fingerprint }}
+  {{ $imgLarge := .Resize "1200x" | resources.Fingerprint }}
+
+  <style>
+    .home-banner {
+      background-image: url('{{ $imgLarge.RelPermalink }}');
+      background-size: cover;
+      background-position: center;
+    }
+
+    @media (max-width: 900px) {
+      .home-banner {
+        background-image: url('{{ $imgMedium.RelPermalink }}');
+      }
+    }
+
+    @media (max-width: 600px) {
+      .home-banner {
+        background-image: url('{{ $imgSmall.RelPermalink }}');
+      }
+    }
+  </style>
+{{ end }}

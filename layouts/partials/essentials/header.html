@@ -1,0 +1,113 @@
+<header
+  class="header bg-primary-light {{ if site.Params.navbar_fixed }}sticky top-0{{ end }} z-30">
+  <nav class="navbar container">
+    <!-- logo -->
+    <div class="w-full flex items-center">
+      <div class="flex-1 flex justify-between">
+        
+          <!-- navbar brand/logo -->
+          <a class="navbar-brand block" href="{{ site.Home.RelPermalink }}">
+            {{ partial "logo" }}
+          </a>
+  
+        {{ with site.Params.search }}
+            {{ if .enable }}
+              <button
+                aria-label="search"
+                class="border-border text-text-dark hover:text-primary
+                dark:border-darkmode-border mr-5 inline-block border-r pr-5
+                text-xl dark:text-white cursor-pointer dark:hover:text-darkmode-primary"
+                data-target="search-modal">
+                <i class="fa-solid fa-search"></i>
+              </button>
+            {{ end }}
+          {{ end }}
+      </div>
+
+      <div class="flex-none">
+      <!-- navbar toggler -->
+        <input id="nav-toggle" type="checkbox" class="hidden" />
+        <label
+          for="nav-toggle"
+          class="cursor-pointer flex items-center lg:hidden text-text-dark dark:text-white lg:order-1">
+          <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
+            <title>Menu Open</title>
+            <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+          </svg>
+          <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
+            <title>Menu Close</title>
+            <polygon
+              points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+              transform="rotate(45 10 10)"></polygon>
+          </svg>
+        </label>
+        <!-- /navbar toggler -->
+      
+   
+    <!-- main navbar -->
+    <div class="absolute left-0 top-full w-full justify-center lg:static lg:flex lg:auto hidden" id="nav-menu">
+        <ul class="navbar-nav w-100 lg:flex w-full pb-6 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+          {{ $currentPage := . }}
+          {{ range site.Menus.main }}
+            {{ $menuURL := .URL | absLangURL }}
+            {{ $pageURL:= $currentPage.Permalink | absLangURL }}
+            {{ $active := eq $menuURL $pageURL }}
+              <li class="nav-item justify-items-center">
+                <a
+                  class="w-100 lg:w-auto nav-link {{ if $active }}active{{- end -}}"
+                  {{ if findRE `^http` .URL }}
+                    target="_blank" rel="noopener"
+                  {{ end }}
+                  href="{{- if findRE `^#` .URL -}}
+                    {{- if not $.IsHome -}}
+                      {{- site.Home.RelPermalink -}}
+                    {{- end }}{{- .URL -}}
+                  {{- else -}}
+                    {{- .URL | relLangURL -}}
+                  {{- end -}}"
+                  >{{ .Name }}</a
+                >
+              </li>
+          {{ end }}
+          {{ if site.Params.navigation_button.enable }}
+            <li class="mt-4 inline-block lg:hidden">
+              <a
+                class="btn btn-outline-primary btn-sm"
+                href="{{ site.Params.navigation_button.link | relLangURL }}">
+                {{ site.Params.navigation_button.label }}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+        <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+            {{ partial "components/language-switcher" (dict "Context" . "Class" "mr-5 pl-2 py-1 dark:bg-darkmode-light rounded") }}
+            {{/*  {{ partial "components/theme-switcher" (dict "Class" "mr-5") }}  */}}
+    
+            <!-- navigation btn -->
+            {{ if site.Params.navigation_button.enable }}
+              <a
+                href="{{ site.Params.navigation_button.link | relLangURL }}"
+                class="btn btn-outline-primary btn-sm hidden lg:inline-block">
+                {{ site.Params.navigation_button.label }}
+              </a>
+            {{ end }}
+          </div>
+      </div>
+    </div>
+    </div>
+
+  <!-- navigation categories -->
+ 
+    <ul id="categories-menu" class="overflow-x-auto flex w-full py-6 lg:order-1 space-x-4 xl:space-x-6">
+    {{ range $name, $items := site.Taxonomies.categories }}
+      <li class= "">
+        <a href="/articles/#{{ urlize $name }}" 
+          data-target="{{ urlize $name }}" 
+            class="categorie rounded-md whitespace-nowrap px-4 py-2 font-semibold hover:text-primary dark:hover:text-darkmode-primary">
+          {{ $name | humanize }}
+        </a>
+      </li>
+    {{ end }}
+    </ul>
+  </nav>
+</header>

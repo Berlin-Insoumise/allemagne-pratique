@@ -27,7 +27,8 @@ google_adsense = ""     # example: ca-pub-xxxxxxxxxxxxxxxx
 # custom script on header, example: custom_script= "<script>console.log(\"Hello World\")</script>"
 custom_script = ""
 # copyright
-copyright = "[Un site proposé par Berlin Insoumise © Allemagne Pratique 2025](https://allemagne-pratique.fr/a-propos)"
+
+copyright = "[Un site proposé par Berlin Insoumise © Allemagne Pratique 2025](https://allemagne-pratique.org/a-propos)"
 
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
@@ -64,9 +65,10 @@ content = "You must replace the **baseURL** in **hugo.toml** file when deploying
 [metadata]
 keywords = ["conseils pratiques Allemagne", "s'installer en Allemagne"]
 description = "Site de conseils pratiques pour les français qui s'installent en Allemagne"
-author = "zeon.studio"
-twitter = "zeon_studio"
-image = "images/og-image.png"
+author = "L'équipe Allemagne Pratique"
+twitter = ""
+image = "/images/allemagne-pratique.png"
+
 
 
 # site verifications

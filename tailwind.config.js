@@ -5,6 +5,16 @@ module.exports = {
     "./assets/css/**/*.{css,scss}",    // pour le CSS avec @apply
     "./themes/hugoplate/**/*.{html,css}"
   ],
-  theme: { extend: {} },
+
+  theme: { extend: {
+    spacing: {
+        '8': '2rem',
+        '12': '3rem',
+        '16': '4rem',
+        '24': '6rem',
+        '32': '8rem',
+        '36': '9rem',
+      }
+  } },
   plugins: [],
 };

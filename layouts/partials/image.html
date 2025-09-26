@@ -1,5 +1,5 @@
 {{ $src := .Src }}
 {{ $alt := .Alt | default "image" }}
-{{ $class := .Class | default "w-full h-auto rounded" }}
+{{ $class := .Class | default "" }}
 
 <img src="{{ $src | relURL }}" alt="{{ $alt }}" class="{{ $class }}">

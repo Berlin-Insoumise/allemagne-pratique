@@ -3,7 +3,9 @@ title: "Titre article citoyenneté 6"
 meta_title: ""
 description: "this is meta description"
 date: 2025-04-14T05:00:00Z
-image: "/images/image-placeholder.png"
+
+image: ""
+
 categories: ["Citoyenneté"]
 author: "John Doe"
 tags: ["pass", "Cinéma"]

@@ -37,7 +37,7 @@
           <!-- conseil -->
           {{ with .Params.conseil }}
             {{ range $i, $e := . }}
-              <div class="row items-center justify-between {{ if (modBool $i 2) }}{{ end }}">
+              <div class="items-center justify-between {{ if (modBool $i 2) }}{{ end }}">
                 <div class="{{ if not (modBool $i 2) }} md:order-1 {{ end }}">
                   <h2 class="my-8">{{ $e.title | markdownify }}</h2>
                 </div>
@@ -47,7 +47,7 @@
           <!-- /conseil -->
 
           <!-- categories -->
-          <div class="row items-center justify-between border border-gray-300 rounded-md mt-8">
+          <div class="items-center justify-between border border-gray-300 rounded-md mt-8">
             {{ if isset site.Taxonomies "categories" }}
               {{ if gt (len site.Taxonomies.categories) 0 }}
                 <h3 class="pt-8 px-8 text-lg">Conseils pratiques</h3>

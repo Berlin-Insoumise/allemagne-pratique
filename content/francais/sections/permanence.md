@@ -1,13 +1,15 @@
 ---
 enable: true
 title: "Besoin d'aide ?"
-description: "Permanence jurudique gratuite à Berlin"
+description: "Permanence juridique gratuite à Berlin"
 button:
   enable: true
   label: "Voir les créneaux disponibles"
-  link: "https://github.com/zeon-studio/hugoplate"
+  link: "https://"
 
 # don't create a separate page
 build:
   render: "never"
 ---
+
+Permanence juridique gratuite à <strong>Berlin</strong>

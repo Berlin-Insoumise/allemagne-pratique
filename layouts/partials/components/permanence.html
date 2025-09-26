@@ -2,24 +2,25 @@
     {{ if .Params.enable }}
       <section class="row">
         <div class=" mb-12">
-          <h2 class="mb-4">
+          <h2 class="mb-4 h3">
             {{ .Title | markdownify }}
           </h2>
-          
-          <p>
-            {{ .Params.description | markdownify }}
-          </p>
-          {{ with .Params.button }}
-          {{ if .enable }}
-            <a
-              class="btn btn-outline-primary btn-sm hidden lg:inline-block"
-              href="{{ .link | absURL }}"
-              target="_blank"
-              rel="noopener">
-              {{ .label }}
-            </a>
-          {{ end }}
-        {{ end }}
+          <div class="flex flex-col space-y-4 bg-light dark:bg-darkmode-light rounded p-8 card">
+            <p>
+              {{ .Content | markdownify }}
+            </p>
+            {{ with .Params.button }}
+            {{ if .enable }}
+              <a
+                class="btn btn-outline-primary w-full text-center"
+                href="{{ .link | absURL }}"
+                target="_blank"
+                rel="noopener">
+                {{ .label }}
+              </a>
+            {{ end }}
+            {{ end }}
+          </div>
         </div>
       </section>
     {{ end }}

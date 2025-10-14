@@ -15,7 +15,7 @@ logo_text = "Allemagne Pratique"
 # navbar fixed to top
 navbar_fixed = true
 # theme-mode
-theme_switcher = true
+theme_switcher = false
 theme_default = "system" # available options [light/dark/system]
 # Main Sections
 mainSections = ["blog"]
@@ -28,7 +28,7 @@ google_adsense = ""     # example: ca-pub-xxxxxxxxxxxxxxxx
 custom_script = ""
 # copyright
 
-copyright = "[Un site proposé par Berlin Insoumise © Allemagne Pratique 2025](https://allemagne-pratique.org/a-propos)"
+copyright = "Un site proposé par Berlin Insoumise"
 
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
@@ -65,9 +65,11 @@ content = "You must replace the **baseURL** in **hugo.toml** file when deploying
 [metadata]
 keywords = ["conseils pratiques Allemagne", "s'installer en Allemagne"]
 description = "Site de conseils pratiques pour les français qui s'installent en Allemagne"
-author = "L'équipe Allemagne Pratique"
-twitter = ""
 image = "/images/allemagne-pratique.png"
+[author]
+name = "Clémence Lemaire (clemencizm)"
+homepage = "https://www.linkedin.com/in/clemencizm/"
+github = "https://github.com/clemencizm"
 
 
 
